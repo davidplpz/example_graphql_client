@@ -15,17 +15,18 @@ const FIND_BY_NAME = gql`
 const Users = ({ users }) => {
   const [getUser, result] = useLazyQuery(FIND_BY_NAME);
   const [user, setUser] = useState(null);
-  const deleteUserHandler = () => setUser(undefined);
   const showUser = (name) => {
     getUser({ variables: { name: name } });
   };
 
-  useEffect(() => {
-    if (result.data) {
-      setUser(result.data.findByName);
-    }
-  }, [result]);
-
+  useEffect(
+    () => {
+      if (result.data) {
+        setUser(result.data.findByName);
+      }
+    },
+    [result.data]
+  );
   if (user) {
     return (
       <div>
@@ -34,7 +35,7 @@ const Users = ({ users }) => {
         <p>Teléfono: {user.phone}</p>
         <p>Edad: {user.age}</p>
         <div>
-          <button onClick={deleteUserHandler}>Cerrar</button>
+          <button onClick={() => setUser(null)}>Cerrar</button>
         </div>
       </div>
     );
