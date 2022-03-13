@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import logo from "./logo.svg";
 import "./App.css";
+import Users from "./Users";
 
 const FIND_ALL = gql`
   query {
@@ -11,30 +12,18 @@ const FIND_ALL = gql`
   }
 `;
 
-const Error = () => <p>Ha ocurrido un error</p>;
+const Error = () => <span>Ha ocurrido un error</span>;
 const Loading = () => <p>Cargando ...</p>;
 const App = () => {
   const { data, loading, error } = useQuery(FIND_ALL);
   if (error) {
     return <Error />;
   }
-  console.log(data);
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            <p>GraphQL + React!</p>
-            <>
-              {data.findAll.map((user) => (
-                <p key={user.id}>{user.name}</p>
-              ))}
-            </>
-          </>
-        )}
+        {loading ? <Loading /> : <Users users={data?.findAll} />}
       </header>
     </div>
   );
