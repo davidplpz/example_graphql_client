@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import logo from "./logo.svg";
 import "./App.css";
-import Users from "./Users";
+import Users from "./components/Users";
 
 const FIND_ALL = gql`
   query {
