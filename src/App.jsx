@@ -2,6 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import logo from "./logo.svg";
 import "./App.css";
 import Users from "./components/Users";
+import UserForm from "./components/UserForm";
 
 const FIND_ALL = gql`
   query {
@@ -25,6 +26,7 @@ const App = () => {
         <img src={logo} className="App-logo" alt="logo" />
         {loading ? <Loading /> : <Users users={data?.findAll} />}
       </header>
+      <UserForm></UserForm>
     </div>
   );
 };
