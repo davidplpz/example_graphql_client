@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { gql, useLazyQuery } from "@apollo/client";
-
-const FIND_BY_NAME = gql`
-  query FindByName($name: String!) {
-    findByName(name: $name) {
-      id
-      name
-      phone
-      age
-    }
-  }
-`;
+import { useLazyQuery } from "@apollo/client";
+import { FIND_BY_NAME } from "../users/queries";
 
 const Users = ({ users }) => {
   const [getUser, result] = useLazyQuery(FIND_BY_NAME);
@@ -19,14 +9,11 @@ const Users = ({ users }) => {
     getUser({ variables: { name: name } });
   };
 
-  useEffect(
-    () => {
-      if (result.data) {
-        setUser(result.data.findByName);
-      }
-    },
-    [result.data]
-  );
+  useEffect(() => {
+    if (result.data) {
+      setUser(result.data.findByName);
+    }
+  }, [result.data]);
   if (user) {
     return (
       <div>

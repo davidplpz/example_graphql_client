@@ -1,21 +1,14 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import logo from "./logo.svg";
 import "./App.css";
 import Users from "./components/Users";
 import UserForm from "./components/UserForm";
-
-const FIND_ALL = gql`
-  query {
-    findAll {
-      id
-      name
-    }
-  }
-`;
+import { FIND_ALL } from "./users/queries";
 
 const Error = () => <span>Ha ocurrido un error</span>;
 const Loading = () => <p>Cargando ...</p>;
 const App = () => {
+  // const { data, loading, error } = useQuery(FIND_ALL, {pollInterval: 2000}); => Pooling cada 2 segundo
   const { data, loading, error } = useQuery(FIND_ALL);
   if (error) {
     return <Error />;

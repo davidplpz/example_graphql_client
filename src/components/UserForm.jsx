@@ -1,22 +1,7 @@
 import React, { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
-
-const ADD_USER = gql`
-  mutation add(
-    $name: String!
-    $phone: String!
-    $age: Int!
-    $street: String!
-    $city: String!
-  ) {
-    add(name: $name, phone: $phone, age: $age, street: $street, city: $city) {
-      id
-      name
-      phone
-      age
-    }
-  }
-`;
+import { FIND_ALL } from "../users/queries";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../users/mutations";
 
 const UserForm = () => {
   const [name, setName] = useState("");
@@ -24,12 +9,14 @@ const UserForm = () => {
   const [age, setAge] = useState(0);
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
-  const [addUser] = useMutation(ADD_USER);
+  const [addUser] = useMutation(ADD_USER, {
+    refetchQueries: [{ query: FIND_ALL }],
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const numericAge = parseInt(age);
-    console.log(numericAge)
+    console.log(numericAge);
     addUser({ variables: { name, phone, age: numericAge, street, city } });
     setName("");
     setPhone("");
