@@ -3,7 +3,7 @@ import { FIND_ALL } from "../users/queries";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../users/mutations";
 
-const UserForm = () => {
+const UserForm = ({ notifyError }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [age, setAge] = useState(0);
@@ -11,12 +11,14 @@ const UserForm = () => {
   const [city, setCity] = useState("");
   const [addUser] = useMutation(ADD_USER, {
     refetchQueries: [{ query: FIND_ALL }],
+    onError: (error) => {
+      notifyError(error.graphQLErrors[0].message);
+    }
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const numericAge = parseInt(age);
-    console.log(numericAge);
     addUser({ variables: { name, phone, age: numericAge, street, city } });
     setName("");
     setPhone("");
