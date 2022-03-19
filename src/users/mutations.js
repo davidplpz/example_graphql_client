@@ -16,3 +16,13 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const UPDATE_PHONE = gql`
+  mutation updatePhone($name: String!, $phone: String!) {
+    updatePhone(name: $name, phone: $phone) {
+      id
+      name
+      age
+    }
+  }
+`;

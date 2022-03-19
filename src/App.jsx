@@ -5,6 +5,7 @@ import UserForm from "./components/UserForm";
 import { useUsers } from "./users/hooks";
 import React, { useState } from "react";
 import Notify from "./components/Notify";
+import EditPhoneForm from "./components/EditPhoneForm";
 
 const Error = () => <span>Ha ocurrido un error</span>;
 const Loading = () => <p>Cargando ...</p>;
@@ -26,6 +27,7 @@ const App = () => {
         <img src={logo} className="App-logo" alt="logo" />
         {loading ? <Loading /> : <Users users={data?.findAll} />}
       </header>
+      <EditPhoneForm />
       <UserForm notifyError={notifyError}></UserForm>
     </div>
   );
