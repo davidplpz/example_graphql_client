@@ -10,9 +10,22 @@ const UserForm = ({ notifyError }) => {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [addUser] = useMutation(ADD_USER, {
-    refetchQueries: [{ query: FIND_ALL }],
+    //refetchQueries: [{ query: FIND_ALL }],
     onError: (error) => {
       notifyError(error.graphQLErrors[0].message);
+    },
+    update: (store, response) => {
+      const data = store.readQuery({query: FIND_ALL});
+      store.writeQuery({
+        query: FIND_ALL,
+        data: {
+          ...data,
+          findAll: [
+            ...data.findAll,
+            response.data.add
+          ]
+        }
+      })
     }
   });
 
