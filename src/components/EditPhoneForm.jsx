@@ -21,11 +21,13 @@ const EditPhoneForm = () => {
         <input
           type="text"
           value={name}
+          placeholder='nombre'
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
           value={phone}
+          placeholder='teléfono'
           onChange={(e) => setPhone(e.target.value)}
         />
         <button type="submit">Editar</button>

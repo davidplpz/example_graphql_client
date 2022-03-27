@@ -9,9 +9,17 @@ import {
 import "./index.css";
 import App from "./App";
 
+const auth = () => {
+  const token = localStorage.getItem("react-app-token");
+  return token ? `bearer ${token}` : null;
+};
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
+    headers: {
+      authorization: auth()
+    },
     uri: "http://localhost:4000",
   }),
 });

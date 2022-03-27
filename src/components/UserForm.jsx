@@ -34,26 +34,31 @@ const UserForm = ({ notifyError }) => {
         <input
           type="text"
           value={name}
+          placeholder='nombre'
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
           value={phone}
+          placeholder='teléfono'
           onChange={(e) => setPhone(e.target.value)}
         />
         <input
           type="text"
           value={age}
+          placeholder='edad'
           onChange={(e) => setAge(e.target.value)}
         />
         <input
           type="text"
           value={street}
+          placeholder='dirección'
           onChange={(e) => setStreet(e.target.value)}
         />
         <input
           type="text"
           value={city}
+          placeholder='ciudad'
           onChange={(e) => setCity(e.target.value)}
         />
         <button type="submit">Crear</button>

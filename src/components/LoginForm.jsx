@@ -13,7 +13,6 @@ const LoginForm = ({ notifyError, setToken }) => {
     if (result.data) {
       const token = result.data.login.value;
       setToken(token);
-      console.log(token);
       localStorage.setItem("react-app-token", token);
     }
   }, [result.data]);
