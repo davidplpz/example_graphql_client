@@ -13,3 +13,7 @@ Se añade un nuevo componente que retorna un listado de usuarios y cuando haces 
 ## ft_edit_user
 
 Se añade la modificación de un usario a través de la mutación correspondiente.
+
+## ft_login
+
+Se añade la operación de login, con un formulario y el guardado del token en el localstorage
