@@ -6,11 +6,13 @@ import { useUsers } from "./users/hooks";
 import React, { useState } from "react";
 import Notify from "./components/Notify";
 import EditPhoneForm from "./components/EditPhoneForm";
+import LoginForm from "./components/LoginForm";
 
 const Error = () => <span>Ha ocurrido un error</span>;
 const Loading = () => <p>Cargando ...</p>;
 const App = () => {
   const [errorMsg, setErrorMsg] = useState(null);
+  const [token, setToken] = useState(null);
   const notifyError = (msg) => {
     setErrorMsg(msg);
     setTimeout(() => setErrorMsg(null), 5000);
@@ -27,8 +29,16 @@ const App = () => {
         <img src={logo} className="App-logo" alt="logo" />
         {loading ? <Loading /> : <Users users={data?.findAll} />}
       </header>
-      <EditPhoneForm />
-      <UserForm notifyError={notifyError}></UserForm>
+      <div>
+        <h2>Login</h2>
+        <LoginForm notifyError={notifyError} setToken={setToken} />
+      </div>
+      <div>
+        <UserForm notifyError={notifyError}></UserForm>
+      </div>
+      <div>
+        <EditPhoneForm />
+      </div>
     </div>
   );
 };

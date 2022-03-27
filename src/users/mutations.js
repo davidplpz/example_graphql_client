@@ -26,3 +26,11 @@ export const UPDATE_PHONE = gql`
     }
   }
 `;
+
+export const LOGIN = gql`
+  mutation login($username: String!, $password: String!) {
+    login(userName: $username, password: $password) {
+      value
+    }
+  }
+`;
